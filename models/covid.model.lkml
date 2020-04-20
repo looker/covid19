@@ -23,6 +23,10 @@ explore: kpis_by_entity_by_date {
   extends: [kpis_by_entity_by_date_config]
 }
 
+explore: italy {
+  extends: [italy_config]
+}
+
 ############ Caching Logic ############
 
 persist_with: covid_data
