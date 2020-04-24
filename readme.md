@@ -30,6 +30,7 @@ In order to extend the LookML from this block and join it with your own propiete
 
 ### What We're Reading
 > Looking at the coronavirus data is like looking at funhouse mirrors. Everything is distorted in some direction or another; some things look much bigger than they really are, others much smaller. - Nate Silver, [Twitter](https://twitter.com/NateSilver538/status/1241064789738217473?s=20)
+
 With that in mind, here are some of the articles that have informed our understanding around how to explore, present, and share COVID-19 data.
 
 [**Ten Considerations Before You Create Another Chart About COVID-19** by Amanda Makulec](https://medium.com/nightingale/ten-considerations-before-you-create-another-chart-about-covid-19-27d3bd691be8)
