@@ -138,11 +138,6 @@ view: covid_combined_core {
     type: string
     sql: ${TABLE}.county ;;
     link: {
-      label: "Filter on County - {{ value }}"
-      url: "/dashboards/covid::state_cases__policy_response?County={{ value }}&State={{ province_state._value }}"
-      icon_url: "https://looker.com/favicon.ico"
-    }
-    link: {
       label: "{{ value }} - News Search"
       url: "https://news.google.com/search?q={{ value }}%20county%20{{ province_state._value}}%20covid"
       icon_url: "http://www.google.com/s2/favicons?domain_url=http://www.news.google.com"
@@ -189,11 +184,6 @@ view: covid_combined_core {
     type: string
     sql: ${TABLE}.province_state ;;
     drill_fields: [county]
-    link: {
-      label: "{{ value }} - State Deep Dive"
-      url: "/dashboards/covid::state_cases__policy_response?State={{ value }}"
-      icon_url: "https://looker.com/favicon.ico"
-    }
     link: {
       label: "{{ value }} - News Search"
       url: "https://news.google.com/search?q={{ value }}%20covid"
@@ -342,11 +332,6 @@ view: covid_combined_core {
     description: "Use this field with the Show Top X Values filter, ordered by confirmed running total"
     label: "State (Show Top X)"
     sql: case when ${state_rank.rank} <= {% parameter show_top_x_values %} then ${province_state} else ' Other' end ;;
-    link: {
-      label: "{{ value }} - State Deep Dive"
-      url: "/dashboards/covid::state_cases__policy_response?State={{ value }}"
-      icon_url: "https://looker.com/favicon.ico"
-    }
   }
 
  ## Only show counties where rank is less than or equal to show_top_x_values parameter chosen by users
@@ -355,11 +340,6 @@ view: covid_combined_core {
     description: "Use this field with the Show Top X Values filter, ordered by confirmed running total"
     label: "County (Show Top X)"
     sql: case when ${fips_rank.rank} <= {% parameter show_top_x_values %} then ${county} else ' Other' end ;;
-    link: {
-      label: "Filter to County - {{ value }}"
-      url: "/dashboards/covid::state_cases__policy_response?County={{ value }}&State={{ state_top_x._value }}"
-      icon_url: "https://looker.com/favicon.ico"
-    }
   }
 
 

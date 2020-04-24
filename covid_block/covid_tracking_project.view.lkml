@@ -65,11 +65,6 @@ view: covid_tracking_project_core {
     map_layer_name: us_states
     type: string
     sql: ${state_region.state} ;;
-    link: {
-      label: "{{ value }} Drill Down"
-      url: "/dashboards/covid::state_cases__policy_response?State={{ value }}"
-      icon_url: "https://looker.com/favicon.ico"
-    }
   }
 
   dimension_group: measurement {
