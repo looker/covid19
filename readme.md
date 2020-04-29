@@ -44,3 +44,4 @@ With that in mind, here are some of the articles that have informed our understa
 ### Questions, Comments, Concerns?
 This information is provided for informational purposes only.
 We make our best effort to keep data accurate and up to date. If you have questions about the data, please contact the data source identified in the menu of each tile. If you have questions or feedback on the underlying Looker model, please email looker-covid-data-block@google.com
+
