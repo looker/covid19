@@ -25,19 +25,8 @@ explore: italy {
   extends: [italy_config]
 }
 
-explore: mobility_dev {
-  from: mobility_data
-  sql_always_where: ${geo_level_output} = ${geo_level};;
-  always_filter: {
-    filters: [geography_level: "country"]
-  }
-
-  join: max_date_mobility {
-    sql_on: ${mobility_dev.country_region_code} = ${max_date_mobility.country_region_code}
-            AND IFNULL(${mobility_dev.sub_region_1}, '') = ${max_date_mobility.province_state}
-            AND IFNULL(${mobility_dev.sub_region_2}, '') = ${max_date_mobility.county};;
-    relationship: many_to_one
-  }
+explore: mobility {
+  extends: [mobility_config]
 }
 
 

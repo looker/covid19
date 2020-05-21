@@ -1,8 +1,17 @@
+include: "//@{CONFIG_PROJECT_NAME}/covid_block/mobility.view.lkml"
+
+view: mobility_data {
+  extends: [mobility_data_config]
+}
+
+###################################################
+
+
 # This derived table selects everything from mobility data, then joins it to the state and county data for the US
 
 # This file contains logic to make sure that this mobility data is not aggregated in problematic ways.
 
-view: mobility_data {
+view: mobility_data_core {
   derived_table: {
     datagroup_trigger: covid_data
     sql:  SELECT
@@ -429,6 +438,14 @@ view: mobility_data {
 
 
 ### } County-Level: Non-Weighted Measures
+
+# filter: name_filter {
+#   suggest_explore: users
+#   suggest_dimension: users.name
+#   type: string
+#   sql: ${country_region_code} IN (SELECT users.id FROM users WHERE
+#     {% condition name_filter %} users.name {% endcondition %}) ;;
+# }
 
 ### { Misc Measures
 
