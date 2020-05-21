@@ -238,15 +238,14 @@ view: covid_combined_core {
     sql:
       case
         when ${TABLE}.country_region = 'Korea, South' then 'South Korea'
-        when ${TABLE}.country_region = 'Tanzania' then 'United Republic of Tanzania'
-        when ${TABLE}.country_region = 'Congo (Kinshasa)' then 'Democratic Republic of the Congo'
-        when ${TABLE}.country_region = 'Congo (Brazzaville)' then 'Republic of the Congo'
-        when ${TABLE}.country_region = 'Czechia' then 'Czech Republic'
-        when ${TABLE}.country_region = 'Czechia' then 'Czech Republic'
-        when ${TABLE}.country_region = 'Serbia' then 'Republic of Serbia'
-        when ${TABLE}.country_region = 'North Macedonia' then 'Macedonia'
         when ${TABLE}.country_region = 'US' then 'United States of America'
         when ${TABLE}.country_region = 'UK' then 'United Kingdom'
+        when ${TABLE}.country_region = 'North Ireland' then 'Ireland'
+        when ${TABLE}.country_region = 'Republic of Ireland' then 'Ireland'
+        when ${TABLE}.country_region = 'Czech Republic' then 'Czechia'
+        when ${TABLE}.country_region = 'Viet Nam' then 'Vietnam'
+        when ${TABLE}.country_region = 'The Bahamas' then 'Bahamas'
+        when ${TABLE}.country_region = 'Bahamas, The' then 'Bahamas'
         else ${TABLE}.country_region
       end ;;
     drill_fields: [province_state]
