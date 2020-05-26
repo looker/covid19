@@ -92,13 +92,13 @@ view: mobility_data_core {
     dimension: country_region {
       type: string
       sql: ${TABLE}.country_region ;;
-      hidden: yes
+      label: "1 - Country (Full name)"
     }
 
     dimension: country_region_code {
       type: string
-      label: "1 - Country"
-      sql: ${TABLE}.country_region_code ;;
+      label: "1 - Country (ISO Code)"
+      sql: ${TABLE}.country_region_code;;
       map_layer_name: countries
       html: {{ country_region._value }} ;;
     }
@@ -302,6 +302,7 @@ view: mobility_data_core {
       value_format_name: percent_1
     }
 
+
     measure: avg_parks_percent_change_from_baseline {
       group_label: "Parks"
       label: "Parks (Daily % Change from Baseline)"
@@ -341,7 +342,8 @@ view: mobility_data_core {
       value_format_name: percent_1
     }
 
-    measure: residential_7_cay_moving_avg {
+
+    measure: residential_7_day_moving_avg {
       group_label: "Residential"
       label: "Residential (7-Day Moving Avg)"
       group_item_label: "7-Day Moving Avg"
@@ -435,17 +437,137 @@ view: mobility_data_core {
       value_format_name: percent_1
     }
 
+### } Date-logic Measures
 
+### { Dynamic 7-day or Daily Measures
 
-### } County-Level: Non-Weighted Measures
+    parameter: daily_or_avg {
+      allowed_value: {
+        label: "Daily Measures"
+        value: "daily"
+      }
+      allowed_value: {
+        label: "7-Day Moving Avg"
+        value: "mov_avg"
+      }
+    }
 
-# filter: name_filter {
-#   suggest_explore: users
-#   suggest_dimension: users.name
-#   type: string
-#   sql: ${country_region_code} IN (SELECT users.id FROM users WHERE
-#     {% condition name_filter %} users.name {% endcondition %}) ;;
-# }
+    measure: grocery_and_pharmacy_dynamic {
+      sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_grocery_and_pharmacy_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${grocery_and_pharmacy_7_day_moving_avg}
+           ELSE 0
+           END;;
+      html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+      group_item_label: "Dynamic"
+      label: "Grocery and Pharmacy (Dynamic)"
+      group_label: "Grocery and Pharmacy"
+      value_format_name: percent_1
+      type: number
+    }
+
+  measure: parks_dynamic {
+    sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_parks_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${parks_7_day_moving_avg}
+           ELSE 0
+           END;;
+    html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+    group_item_label: "Dynamic"
+    label: "Parks (Dynamic)"
+    group_label: "Parks"
+    value_format_name: percent_1
+    type: number
+  }
+
+  measure: residential_dynamic {
+    sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_residential_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${residential_7_day_moving_avg}
+           ELSE 0
+           END;;
+    html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+    group_item_label: "Dynamic"
+    label: "Residential (Dynamic)"
+    group_label: "Residential"
+    value_format_name: percent_1
+    type: number
+  }
+
+  measure: retail_and_recreation_dynamic {
+    sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_retail_and_recreation_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${retail_and_recreation_7_day_moving_avg}
+           ELSE 0
+           END;;
+    html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+    group_item_label: "Dynamic"
+    label: "Retail and Recreation (Dynamic)"
+    group_label: "Retail and Recreation"
+    value_format_name: percent_1
+    type: number
+  }
+
+  measure: transit_stations_dynamic {
+    sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_transit_stations_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${transit_stations_7_day_moving_avg}
+           ELSE 0
+           END;;
+    html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+    group_item_label: "Dynamic"
+    label: "Transit Stations (Dynamic)"
+    group_label: "Transit Stations"
+    value_format_name: percent_1
+    type: number
+  }
+
+  measure: workplaces_dynamic {
+    sql: CASE WHEN {% parameter daily_or_avg %} = 'daily'
+           THEN ${avg_workplaces_percent_change_from_baseline}
+           WHEN {% parameter daily_or_avg %} = 'mov_avg'
+           THEN ${workplaces_7_day_moving_avg}
+           ELSE 0
+           END;;
+    html: {% if daily_or_avg._parameter_value == "'daily'" or daily_or_avg._parameter_value == "'mov_avg'" %}
+              {{ rendered_value }}
+            {% else %}
+              You must choose daily values or moving average.
+            {% endif %};;
+    group_item_label: "Dynamic"
+    label: "Workplaces (Dynamic)"
+    group_label: "Workplaces"
+    value_format_name: percent_1
+    type: number
+  }
+
+### } Dynamic 7-day or Daily Measures
+
 
 ### { Misc Measures
 
