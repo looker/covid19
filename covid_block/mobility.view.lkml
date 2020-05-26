@@ -93,6 +93,8 @@ view: mobility_data_core {
       type: string
       sql: ${TABLE}.country_region ;;
       label: "1 - Country (Full name)"
+      suggest_explore: countries
+      suggest_dimension: countries.country_name
     }
 
     dimension: country_region_code {
@@ -109,16 +111,23 @@ view: mobility_data_core {
       sql: ${TABLE}.sub_region_1 ;;
       map_layer_name: us_states
       drill_fields: [sub_region_2_fips]
+      suggest_explore: states
+      suggest_dimension: states.state_name
+
     }
 
     dimension: sub_region_2 {
       type: string
-      hidden: yes
+      label: "3 - County Name (US Only)"
+#       hidden: yes
       sql: ${TABLE}.sub_region_2 ;;
+      suggest_explore: counties
+      suggest_dimension: counties.county_name
+
     }
 
     dimension: sub_region_2_fips {
-      label: "3 - County (US Only)"
+      label: "3 - County (FIPS for maps)"
       type: string
       sql: ${county_fips} ;;
       map_layer_name: us_counties_fips
@@ -176,7 +185,7 @@ view: mobility_data_core {
         label: "County (US Only)"
         value: "2"
       }
-      default_value: "country"
+      default_value: "0"
     }
 
     dimension: geo_level_output {

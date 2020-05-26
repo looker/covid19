@@ -47,3 +47,41 @@ view: max_date_mobility_core {
     sql: ${TABLE}.max_mobility_date ;;
   }
 }
+
+explore: countries {
+  hidden: yes
+}
+
+view: countries {
+  derived_table: {
+    sql: SELECT country_region as country_name FROM `bigquery-public-data.covid19_google_mobility.mobility_report` ;;
+  }
+
+  dimension: country_name {}
+}
+
+explore: counties {
+  hidden: yes
+}
+
+view: counties {
+  derived_table: {
+    sql: SELECT sub_region_2 as county_name FROM `bigquery-public-data.covid19_google_mobility.mobility_report` ;;
+  }
+
+  dimension: county_name {}
+}
+
+explore: states {
+  hidden: yes
+}
+
+
+view: states {
+  derived_table: {
+    sql: SELECT sub_region_1 as state_name FROM `bigquery-public-data.covid19_google_mobility.mobility_report` ;;
+  }
+
+  dimension: state_name {}
+
+}
