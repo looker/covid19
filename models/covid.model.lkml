@@ -26,7 +26,6 @@ explore: italy {
 }
 
 explore: mobility {
-  group_label: "*COVID 19"
   extends: [mobility_config]
 }
 
