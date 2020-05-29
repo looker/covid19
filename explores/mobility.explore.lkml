@@ -3,7 +3,6 @@
 explore: mobility_core {
   from: mobility_data
   extension: required
-  group_label: "*COVID 19"
   description: "This Explore uses data from Google's COVID-19 Community Mobility Reports. Full information about these are available at: https://www.google.com/covid19/mobility/"
   sql_always_where: ${geo_level_output} = ${geo_level};;
   # always_filter: {
