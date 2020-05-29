@@ -4,7 +4,7 @@ explore: italy_core {
   from: italy_regions
   extension: required
   description: "This explore is based off of data released from the Italian government which shows province and region level data for Italy"
-  group_label: "*COVID 19"
+  group_label: "COVID 19"
 
 
   join: italy_province {
