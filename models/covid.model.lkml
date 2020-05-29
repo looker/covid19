@@ -5,7 +5,7 @@ include: "/explores/*.explore.lkml"
 include: "/dashboards/*.dashboard.lookml"
 
 include: "//@{CONFIG_PROJECT_NAME}/*.model.lkml"
-# include: "//@{CONFIG_PROJECT_NAME}/*.dashboard"
+include: "//@{CONFIG_PROJECT_NAME}/*.dashboard"
 include: "//@{CONFIG_PROJECT_NAME}/covid_block/*.view.lkml"
 
 #map layers
