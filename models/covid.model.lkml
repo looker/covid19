@@ -26,7 +26,8 @@ explore: italy {
 }
 
 explore: mobility {
-  extends: [mobility_config]
+  # extends: [mobility_config]
+  extends: [mobility_core]
 }
 
 
