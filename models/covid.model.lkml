@@ -25,12 +25,6 @@ explore: italy {
   extends: [italy_config]
 }
 
-explore: mobility {
-  # extends: [mobility_config]
-  extends: [mobility_core]
-}
-
-
 ############ Caching Logic ############
 
 persist_with: covid_data
