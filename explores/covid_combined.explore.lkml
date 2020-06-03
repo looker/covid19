@@ -4,7 +4,7 @@ explore: covid_combined_core {
   from: covid_combined
   extension: required
   description: "This explore has the core metrics for the COVID19 datasets, international data is available at the state level through JHU and county level data is available for the United States through NYT"
-  group_label: "*COVID 19"
+  group_label: "COVID 19"
   label: "COVID - Main"
   view_label: " COVID19"
 
