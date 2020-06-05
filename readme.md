@@ -31,7 +31,7 @@
 • [italy_region_stats](/projects/covid/files/covid_block/italy_region_stats.view.lkml) Population estimates and Area by Italy Region
 
 
-#### *In order to extend the LookML from this block and join it with your own propietery data sources please use this [guide](https://docs.looker.com/data-modeling/marketplace/customize-blocks).*
+#### *In order to extend the LookML from this block and join it with your own proprietery data sources please use this [guide](https://docs.looker.com/data-modeling/marketplace/customize-blocks).*
 
 ---------
 
