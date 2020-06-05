@@ -24,7 +24,7 @@
   "auxiliary_projects": [
     {
       "git_uri": "git://github.com/llooker/data-block-covid19-config.git",
-      "git_ref": "14b95db575ecbfbdcff2c2cc07f6d509de31891d",
+      "git_ref": "14f2009063654ee4ade09d81f758db29fec9e4d6",
       "label": "Covid-19 Config",
       "constant_name": "CONFIG_PROJECT_NAME"
     }
