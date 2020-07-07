@@ -164,7 +164,7 @@ view: fips_rank_core {
 view: prior_days_cases_covid_core {
   view_label: "Trends"
   derived_table: {
-    datagroup_trigger: covid_data
+    datagroup_trigger: covid_combine_daily
     explore_source: covid_combined {
       column: measurement_date {}
       column: pre_pk {}
