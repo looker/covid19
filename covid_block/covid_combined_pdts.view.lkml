@@ -164,7 +164,8 @@ view: fips_rank_core {
 view: prior_days_cases_covid_core {
   view_label: "Trends"
   derived_table: {
-    datagroup_trigger: covid_combine_daily
+    sql_trigger_value: SELECT max(cast(measurement_date as date)) as max_date FROM ${covid_combined.SQL_TABLE_NAME} ;;
+    # datagroup_trigger: covid_combine_daily
     explore_source: covid_combined {
       column: measurement_date {}
       column: pre_pk {}
