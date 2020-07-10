@@ -43,12 +43,3 @@ datagroup: covid_data {
     ) a
   ;;
 }
-
-
-datagroup: covid_combine_daily {
-  max_cache_age: "12 hours"
-  sql_trigger:
-      SELECT max(cast(measurement_date as date)) as max_date FROM ${covid_combined.SQL_TABLE_NAME}
-
-  ;;
-}
