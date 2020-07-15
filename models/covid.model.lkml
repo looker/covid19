@@ -39,7 +39,7 @@ datagroup: covid_data {
     (
       SELECT max(cast(date as date)) as max_date FROM `bigquery-public-data.covid19_nyt.us_counties`
       UNION ALL
-      SELECT max(cast(date as date)) as max_date FROM `bigquery-public-data.covid19_jhu_csse.summary`
+      SELECT max(cast(date as date)) as max_date FROM `bigquery-public-data.covid19_open_data.compatibility_view`
     ) a
   ;;
 }

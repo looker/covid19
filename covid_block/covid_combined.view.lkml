@@ -5,6 +5,7 @@ include: "/dashboards/*.dashboard.lookml"
 
 ## NYT data: https://github.com/nytimes/covid-19-data
 ## JHU data: https://cloud.google.com/blog/products/data-analytics/free-public-datasets-for-covid19
+## BQ Open Data: https://cloud.google.com/blog/products/data-analytics/free-public-datasets-for-covid19
 
 view: covid_combined {
   extends: [covid_combined_config]
@@ -45,8 +46,8 @@ view: covid_combined_core {
          )  ORDER BY date ASC),0) as deaths_new_cases
         --a.daily_deaths as deaths_new_cases
       FROM ${nyt_data.SQL_TABLE_NAME} as a
-      LEFT JOIN (SELECT fips, max(latitude) as latitude, max(longitude) as longitude, count(*) as count FROM `bigquery-public-data.covid19_jhu_csse.summary` WHERE fips is not null GROUP BY 1) as b
-        ON cast(a.fips as int64) = cast(b.fips as int64)
+      LEFT JOIN (SELECT fips, max(latitude) as latitude, max(longitude) as longitude, count(*) as count FROM `bigquery-public-data.covid19_open_data.compatibility_view` WHERE fips is not null GROUP BY 1) as b
+        ON cast(a.fips as string) = cast(b.fips as string)
 
       UNION ALL
 
@@ -74,14 +75,14 @@ view: covid_combined_core {
           LAG(deaths, 1) OVER (
           PARTITION BY concat(coalesce(NULL,''), coalesce(province_state,''), coalesce(country_region,'')
           )  ORDER BY date ASC),0) as deaths_new_cases
-        FROM `bigquery-public-data.covid19_jhu_csse.summary`
-        WHERE country_region <> 'US'
+        FROM `bigquery-public-data.covid19_open_data.compatibility_view`
+        WHERE country_region <> 'United States of America'
       )
         WHERE cast(measurement_date as date) <= (SELECT min(max_date) as max_date FROM
         (
           SELECT max(cast(date as date)) as max_date FROM ${nyt_data.SQL_TABLE_NAME}
           UNION ALL
-          SELECT max(cast(date as date)) as max_date FROM  `bigquery-public-data.covid19_jhu_csse.summary`
+          SELECT max(cast(date as date)) as max_date FROM  `bigquery-public-data.covid19_open_data.compatibility_view`
         ) a);;
   }
 
