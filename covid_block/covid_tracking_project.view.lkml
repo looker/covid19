@@ -13,32 +13,35 @@ view: covid_tracking_project_core {
   derived_table: {
     datagroup_trigger: covid_data
     sql:
-      SELECT
-        state,
-        date as measurement_date,
-        total as total_cumulative,
-        total - coalesce(LAG(total, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as total_new_cases,
-        death as death_cumulative,
-        death - coalesce(LAG(death, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as death_new_cases,
-        recovered as recovered_cumulative,
-        recovered - coalesce(LAG(recovered, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as recovered_new_cases,
-        hospitalizedCumulative as hospitalized_cumulative,
-        hospitalizedCumulative - coalesce(LAG(hospitalizedCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as hospitalized_new_cases,
-        hospitalizedCurrently,
-        inIcuCumulative as inIcu_Cumulative,
-        inIcuCumulative - coalesce(LAG(inIcuCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as inIcu_new_cases,
-        inIcuCurrently,
-        onVentilatorCumulative as onVentilator_Cumulative,
-        onVentilatorCumulative - coalesce(LAG(onVentilatorCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as onVentilator_new_cases,
-        onVentilatorCurrently,
-        positive as positive_cumulative,
-        positive - coalesce(LAG(positive, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as positive_new_cases,
-        pending as pending_cumulative,
-        pending - coalesce(LAG(pending, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as pending_new_cases,
-        negative as negative_cumulative,
-        negative - coalesce(LAG(negative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as negative_new_cases,
+      WITH ctp AS (
+          SELECT
+            state,
+            date as measurement_date,
+            total as total_cumulative,
+            total - coalesce(LAG(total, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as total_new_cases,
+            death as death_cumulative,
+            death - coalesce(LAG(death, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as death_new_cases,
+            recovered as recovered_cumulative,
+            recovered - coalesce(LAG(recovered, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as recovered_new_cases,
+            hospitalizedCumulative as hospitalized_cumulative,
+            hospitalizedCumulative - coalesce(LAG(hospitalizedCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as hospitalized_new_cases,
+            hospitalizedCurrently,
+            inIcuCumulative as inIcu_Cumulative,
+            inIcuCumulative - coalesce(LAG(inIcuCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as inIcu_new_cases,
+            inIcuCurrently,
+            onVentilatorCumulative as onVentilator_Cumulative,
+            onVentilatorCumulative - coalesce(LAG(onVentilatorCumulative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as onVentilator_new_cases,
+            onVentilatorCurrently,
+            positive as positive_cumulative,
+            positive - coalesce(LAG(positive, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as positive_new_cases,
+            pending as pending_cumulative,
+            pending - coalesce(LAG(pending, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as pending_new_cases,
+            negative as negative_cumulative,
+            negative - coalesce(LAG(negative, 1) OVER (PARTITION BY state  ORDER BY date ASC),0) as negative_new_cases,
 
-      FROM `lookerdata.covid19_block.covid19_tracking_project`;;
+          FROM `lookerdata.covid19_block.covid19_tracking_project`)
+        SELECT * FROM ctp
+        GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
   }
 
 ####################
@@ -305,7 +308,7 @@ view: covid_tracking_project_core {
     description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
     type: number
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${hospitalized_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${hospitalized_option_1}
     {% else %}  ${hospitalized_option_2}
     {% endif %} ;;
     link: {
@@ -351,7 +354,7 @@ view: covid_tracking_project_core {
     type: number
     description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${negative_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${negative_option_1}
     {% else %}  ${negative_option_2}
     {% endif %} ;;
     link: {
@@ -397,7 +400,7 @@ view: covid_tracking_project_core {
     description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
     type: number
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${pending_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${pending_option_1}
     {% else %}  ${pending_option_2}
     {% endif %} ;;
     link: {
@@ -443,7 +446,7 @@ view: covid_tracking_project_core {
     label: "Positive Test Results (Running Total)"
     type: number
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${positive_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${positive_option_1}
     {% else %}  ${positive_option_2}
     {% endif %} ;;
     link: {
@@ -489,7 +492,7 @@ view: covid_tracking_project_core {
     label: "Total Tests (Running Total)"
     type: number
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${total_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${total_option_1}
     {% else %}  ${total_option_2}
     {% endif %} ;;
     link: {
@@ -622,7 +625,7 @@ view: covid_tracking_project_core {
     label: "Deaths (Running Total)"
     type: number
     sql:
-    {% if covid_tracking_project.measurement_date._in_query %} ${death_option_1}
+    {% if covid_combined.measurement_date._in_query %} ${death_option_1}
     {% else %}  ${death_option_2}
     {% endif %} ;;
     link: {
