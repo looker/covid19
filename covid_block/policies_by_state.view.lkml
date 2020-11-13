@@ -36,7 +36,7 @@ view: policies_by_state_core {
       SELECT
           coalesce(a.Location,b.Location)  as state
         , a.Restaurant_Limits as Bar__Restaurant_Limits
-        , a.Mandatory_Quarantine
+        , a.Mandatory_Quarantine_for_Travelers as Mandatory_Quarantine
         , a.Non_Essential_Business_Closures
         , a.Primary_Election_Postponement
         --, a.State_Mandated_School_Closures
