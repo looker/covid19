@@ -22,7 +22,7 @@ view: policies_by_state_core {
       , CASE WHEN Mandatory_Quarantine IS NULL THEN 'None' ELSE Mandatory_Quarantine END as Mandatory_Quarantine
       , CASE WHEN Non_Essential_Business_Closures = '-' THEN 'None' ELSE Non_Essential_Business_Closures END as Non_Essential_Business_Closures
       , Primary_Election_Postponement
-      , CASE WHEN State_Mandated_School_Closures = '-' THEN 'None' ELSE State_Mandated_School_Closures END as State_Mandated_School_Closures
+      --, CASE WHEN State_Mandated_School_Closures = '-' THEN 'None' ELSE State_Mandated_School_Closures END as State_Mandated_School_Closures
       , CASE WHEN Large_Gatherings_Ban = '-' THEN 'None' ELSE Large_Gatherings_Ban END as Large_Gatherings_Ban
       , CASE WHEN Waive_Cost_Sharing_for_COVID_19_Treatment = '-' THEN 'No policy' ELSE Waive_Cost_Sharing_for_COVID_19_Treatment END as Waive_Cost_Sharing_for_COVID_19_Treatment
       , CASE WHEN Free_Cost_Vaccine_When_Available = '-' THEN 'No policy' ELSE Free_Cost_Vaccine_When_Available END as Free_Cost_Vaccine_When_Available
@@ -35,11 +35,11 @@ view: policies_by_state_core {
     (
       SELECT
           coalesce(a.Location,b.Location)  as state
-        , a.Bar___Restaurant_Limits as Bar__Restaurant_Limits
+        , a.Restaurant_Limits as Bar__Restaurant_Limits
         , a.Mandatory_Quarantine
         , a.Non_Essential_Business_Closures
         , a.Primary_Election_Postponement
-        , a.State_Mandated_School_Closures
+        --, a.State_Mandated_School_Closures
         , a.Large_Gatherings_Ban
         , b.Waive_Cost_Sharing_for_COVID_19_Treatment
         , b.Free_Cost_Vaccine_When_Available
@@ -139,17 +139,17 @@ view: policies_by_state_core {
     sql: ${TABLE}.Primary_Election_Postponement ;;
   }
 
-  dimension: state_mandated_school_closures {
-    group_label: "Social Gatherings"
-    type: string
-    sql: ${TABLE}.State_Mandated_School_Closures ;;
-    html:
-    {% if value == 'No' %} <font color="red">{{ rendered_value }}</font>
-    {% elsif value == 'Yes' %} <font color="green">{{ rendered_value }}</font>
-    {% elsif value == 'Effectively Closed' %} <font color="green">{{ rendered_value }}</font>
-    {% else %}                    <font color="black">{{ rendered_value }}</font>
-    {% endif %} ;;
-  }
+  # dimension: state_mandated_school_closures {
+  #   group_label: "Social Gatherings"
+  #   type: string
+  #   sql: ${TABLE}.State_Mandated_School_Closures ;;
+  #   html:
+  #   {% if value == 'No' %} <font color="red">{{ rendered_value }}</font>
+  #   {% elsif value == 'Yes' %} <font color="green">{{ rendered_value }}</font>
+  #   {% elsif value == 'Effectively Closed' %} <font color="green">{{ rendered_value }}</font>
+  #   {% else %}                    <font color="black">{{ rendered_value }}</font>
+  #   {% endif %} ;;
+  # }
 
 ### Policy
 

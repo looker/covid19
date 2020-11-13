@@ -555,7 +555,6 @@
     type: looker_single_record
     fields: [covid_combined.province_state, policies_by_state.non_essential_business_closures,
       policies_by_state.large_gatherings_ban, policies_by_state.bar_restaurant_limits,
-      policies_by_state.state_mandated_school_closures,
       policies_by_state.paid_sick_leave, policies_by_state.section_1135_waiver]
     filters:
       covid_combined.country_region: United States of America
