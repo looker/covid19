@@ -19,6 +19,10 @@
     {
       "name": "covid",
       "connection_constant": "CONNECTION_NAME"
+    },
+    {
+      "name": "s3_etl",
+      "connection_constant": "CONNECTION_NAME"
     }
   ],
   "auxiliary_projects": [
