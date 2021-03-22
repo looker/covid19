@@ -1,4 +1,5 @@
 - dashboard: italy_drilldown
+  preferred_viewer: dashboards-next
   title: Italy Drilldown
   layout: newspaper
   elements:

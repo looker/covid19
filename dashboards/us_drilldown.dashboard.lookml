@@ -1,4 +1,5 @@
 - dashboard: us_cases__spread
+  preferred_viewer: dashboards-next
   title: US Cases & Spread
   layout: newspaper
   elements:
