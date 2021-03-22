@@ -1,4 +1,5 @@
 - dashboard: state_cases__policy_response
+  preferred_viewer: dashboards-next
   title: State Cases & Policy Response
   layout: newspaper
   elements:

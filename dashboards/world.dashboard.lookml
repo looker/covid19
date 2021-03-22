@@ -1,4 +1,5 @@
 - dashboard: world
+  preferred_viewer: dashboards-next
   title: World
   layout: newspaper
   elements:
