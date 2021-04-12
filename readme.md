@@ -21,7 +21,9 @@
 
 ##### *Views that pull data from datasets we've made available in BigQuery - the ETL for these has not been fully tested, and data should be treated with somewhat less certainty:*
 
-• [covid_tracking_project](/projects/covid/files/covid_block/covid_tracking_project.view.lkml) Pulls in data from the [COVID-19 Tracking project](https://github.com/COVID19Tracking/covid-tracking-data/blob/master/data/states_daily_4pm_et.csv  ) and houses calculations on testing in the US
+• [covid_tracking_project](/projects/covid/files/covid_block/covid_tracking_project.view.lkml) Pulls in data from the [COVID-19 Tracking project](https://github.com/COVID19Tracking/covid-tracking-data/blob/master/data/states_daily_4pm_et.csv  ) and houses calculations on testing in the US. ** The Covid Tracking Project stopped reporting updates on March 7, 2021. Similiar measures were introduced with open_data_main.**
+
+• [open_data_main](/projects/covid/files/covid_block/open_data_main.view.lkml) (New!) Pulls in data from the [COVID-19 Open Data project](https://github.com/GoogleCloudPlatform/covid-19-open-data) and reports on testing, hospitalizations, and vaccination progress in the US.
 
 • [policies_by_state](/projects/covid/files/covid_block/policies_by_state.view.lkml) Pulls in data from the [Kaiser Family Foundation](https://s3-us-west-1.amazonaws.com/starschema.covid/) on policies that states have implemented in response to COVID-19
 

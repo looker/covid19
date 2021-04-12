@@ -188,6 +188,7 @@ view: covid_tracking_project_core {
     description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
     label: "Hospitalizations"
     type: number
+    hidden: yes
     sql:
         {% if covid_combined.new_vs_running_total._parameter_value == 'new_cases' %} ${hospitalized_new}
         {% elsif covid_combined.new_vs_running_total._parameter_value == 'running_total' %} ${hospitalized_running_total}
@@ -203,8 +204,9 @@ view: covid_tracking_project_core {
 ## Based on new_vs_running_total parameter chosen, return new or running total negative test results
   measure: negative_test {
     group_label: "Dynamic (Testing - US Only)"
-    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
+    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Negative Test Results"
+    hidden: yes
     type: number
     sql:
         {% if covid_combined.new_vs_running_total._parameter_value == 'new_cases' %} ${negative_new}
@@ -221,8 +223,9 @@ view: covid_tracking_project_core {
 ## Based on new_vs_running_total parameter chosen, return new or running total pending test results
   measure: pending_test {
     group_label: "Dynamic (Testing - US Only)"
-    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
+    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two. **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Pending Test Results"
+    hidden: yes
     type: number
     sql:
         {% if covid_combined.new_vs_running_total._parameter_value == 'new_cases' %} ${pending_new}
@@ -239,8 +242,9 @@ view: covid_tracking_project_core {
 ## Based on new_vs_running_total parameter chosen, return new or running total positive test results
   measure: positive_test {
     group_label: "Dynamic (Testing - US Only)"
-    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
+    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Positive Test Results"
+    hidden: yes
     type: number
     sql:
         {% if covid_combined.new_vs_running_total._parameter_value == 'new_cases' %} ${positive_new}
@@ -260,6 +264,7 @@ view: covid_tracking_project_core {
     description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
     label: "Total Tests"
     type: number
+    hidden: yes
     sql:
         {% if covid_combined.new_vs_running_total._parameter_value == 'new_cases' %} ${total_new}
         {% elsif covid_combined.new_vs_running_total._parameter_value == 'running_total' %} ${total_running_total}
@@ -276,6 +281,7 @@ view: covid_tracking_project_core {
     group_label: "New Cases (Testing - US Only)"
     description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
     label: "Hospitalizations"
+    hidden: yes
     type: sum
     sql: ${hospitalized_new_cases} ;;
     link: {
@@ -307,6 +313,7 @@ view: covid_tracking_project_core {
     label: "Hospitalizations (Running Total)"
     description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
     type: number
+    hidden: yes
     sql:
     {% if covid_combined.measurement_date._in_query %} ${hospitalized_option_1}
     {% else %}  ${hospitalized_option_2}
@@ -321,8 +328,9 @@ view: covid_tracking_project_core {
   measure: negative_new {
     group_label: "New Cases (Testing - US Only)"
     label: "Negative Test Results (New)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: sum
+    hidden: yes
     sql: ${negative_new_cases} ;;
     link: {
       label: "Data Source - COVID Tracking Project"
@@ -352,7 +360,8 @@ view: covid_tracking_project_core {
     group_label: "Running Total (Testing - US Only)"
     label: "Negative Test Results (Running Total)"
     type: number
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
+    hidden: yes
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used.  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     sql:
     {% if covid_combined.measurement_date._in_query %} ${negative_option_1}
     {% else %}  ${negative_option_2}
@@ -367,8 +376,9 @@ view: covid_tracking_project_core {
   measure: pending_new {
     group_label: "New Cases (Testing - US Only)"
     label: "Pending Test Results (New)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: sum
+    hidden: yes
     sql: ${pending_new_cases} ;;
     link: {
       label: "Data Source - COVID Tracking Project"
@@ -397,8 +407,9 @@ view: covid_tracking_project_core {
   measure: pending_running_total {
     group_label: "Running Total (Testing - US Only)"
     label: "Pending Test Results (Running Total)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used.  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
+    hidden: yes
     sql:
     {% if covid_combined.measurement_date._in_query %} ${pending_option_1}
     {% else %}  ${pending_option_2}
@@ -413,8 +424,9 @@ view: covid_tracking_project_core {
   measure: positive_new {
     group_label: "New Cases (Testing - US Only)"
     label: "Positive Test Results (New)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: sum
+    hidden: yes
     sql: ${positive_new_cases} ;;
     link: {
       label: "Data Source - COVID Tracking Project"
@@ -442,9 +454,10 @@ view: covid_tracking_project_core {
 ## If date in query, show running total of positive test results for given date(s), otherwise show running total of positive test results for most recent dat
   measure: positive_running_total {
     group_label: "Running Total (Testing - US Only)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used.  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Positive Test Results (Running Total)"
     type: number
+    hidden: yes
     sql:
     {% if covid_combined.measurement_date._in_query %} ${positive_option_1}
     {% else %}  ${positive_option_2}
@@ -459,8 +472,9 @@ view: covid_tracking_project_core {
   measure: total_new {
     group_label: "New Cases (Testing - US Only)"
     label: "Total Tests (New)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used "
     type: sum
+    hidden: yes
     sql: ${total_new_cases} ;;
     link: {
       label: "Data Source - COVID Tracking Project"
@@ -491,6 +505,7 @@ view: covid_tracking_project_core {
     description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
     label: "Total Tests (Running Total)"
     type: number
+    hidden: yes
     sql:
     {% if covid_combined.measurement_date._in_query %} ${total_option_1}
     {% else %}  ${total_option_2}
@@ -504,8 +519,9 @@ view: covid_tracking_project_core {
 
   measure: positive_rate {
     group_label: "Rates (Testing - US Only)"
-    description: "Of all tests, how many are positive?"
+    description: "Of all tests, how many are positive?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
+    hidden: yes
     sql: 1.0 * ${positive_running_total} / nullif((${total_running_total}),0);;
     value_format_name: percent_1
     link: {
@@ -517,8 +533,9 @@ view: covid_tracking_project_core {
 
   measure: pending_rate {
     group_label: "Rates (Testing - US Only)"
-    description: "Of all tests, how many are pending?"
+    description: "Of all tests, how many are pending?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
+    hidden: yes
     sql: 1.0 * ${pending_running_total} / nullif((${total_running_total}),0);;
     value_format_name: percent_1
     link: {
@@ -530,8 +547,9 @@ view: covid_tracking_project_core {
 
   measure: negative_rate {
     group_label: "Rates (Testing - US Only)"
-    description: "Of all tests, how many are negative?"
+    description: "Of all tests, how many are negative?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
+    hidden: yes
     sql: 1.0 * ${negative_running_total} / nullif((${total_running_total}),0);;
     value_format_name: percent_1
     link: {
@@ -545,6 +563,7 @@ view: covid_tracking_project_core {
     group_label: "Rates (Testing - US Only)"
     description: "What percent of infections have resulted in hospitalization?"
     type: number
+    hidden: yes
     sql: 1.0 * ${hospitalized_running_total}/NULLIF(${positive_running_total}, 0);;
     value_format_name: percent_1
     link: {
