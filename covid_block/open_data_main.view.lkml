@@ -1,15 +1,16 @@
-# include: "//@{CONFIG_PROJECT_NAME}/covid_block/covid_tracking_project.view.lkml"
+include: "//@{CONFIG_PROJECT_NAME}/covid_block/open_data_main.view.lkml"
 
-#This data was brought in to show testing data from the COVID19 Tracing project - https://covidtracking.com/
+# open_data_main (New!) Pulls in data from the [COVID-19 Open Data project](https://github.com/GoogleCloudPlatform/covid-19-open-data)
+# and reports on testing, hospitalizations, and vaccination progress in the US.
 
-# view: covid_tracking_project {
-#   extends: [covid_tracking_project_config]
-# }
+view: open_data_main {
+  extends: [open_data_main_config]
+}
 
 ###################################################
 
 
-view: open_data_main {
+view: open_data_main_core {
   derived_table: {
     datagroup_trigger: covid_data
     cluster_keys: ["state_name"]
@@ -43,10 +44,6 @@ view: open_data_main {
         SELECT * FROM odm
         GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ;;
   }
-
-####################
-#### Original Dimensions ####
-####################
 
   dimension_group: measurement {
     hidden: yes
@@ -123,7 +120,7 @@ view: open_data_main {
       url: "https://github.com/GoogleCloudPlatform/covid-19-open-data"
     }
   }
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
+
   measure: hospitalized_running_total {
     group_label: "CDC Measures (US Only)"
     label: "Hospitalizations (Running Total)"
@@ -165,7 +162,6 @@ view: open_data_main {
     }
   }
 
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
   measure: cumulative_persons_vaccined_running_total {
     group_label: "CDC Measures (US Only)"
     label: "Persons Vaccinated (Running Total)"
@@ -207,7 +203,6 @@ view: open_data_main {
     }
   }
 
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
   measure: cumulative_persons_fully_vaccined_running_total {
     group_label: "CDC Measures (US Only)"
     label: "Persons Fully Vaccinated (Running Total)"
@@ -249,7 +244,6 @@ view: open_data_main {
     }
   }
 
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
   measure: cumulative_tested_running_total {
     group_label: "CDC Measures (US Only)"
     label: "Tests (Running Total)"
@@ -290,7 +284,6 @@ view: open_data_main {
     }
   }
 
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
   measure: cumulative_confirmed_running_total {
     group_label: "CDC Measures (US Only)"
     label: "Cumulative Confirmed (Running Total)"
@@ -321,7 +314,6 @@ view: open_data_main {
     }
   }
 
-## If date in query, show running total of hospitalizations for given date(s), otherwise show running total hospitalizations for most recent date
   measure: death_cumulative_running_total {
     group_label: "CDC Measures (US Only)"
     hidden: yes
@@ -363,21 +355,10 @@ view: open_data_main {
     }
   }
 
-
-####################
-#### Measures ####
-####################
-
   set: drill {
-    # fields: [
-    #   state,
-    #   measurement_date,
-    #   total,
-    #   positive_test,
-    #   pending_test,
-    #   negative_test,
-    #   deaths,
-    #   hospitalizations
-    # ]
+    fields: [
+      state_name,
+      measurement_date,
+    ]
   }
 }

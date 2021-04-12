@@ -185,7 +185,7 @@ view: covid_tracking_project_core {
 ## Based on new_vs_running_total parameter chosen, return new or running total hospitalizations
   measure: hospitalizations {
     group_label: "Dynamic (Testing - US Only)"
-    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
+    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Hospitalizations"
     type: number
     hidden: yes
@@ -261,7 +261,7 @@ view: covid_tracking_project_core {
 ## Based on new_vs_running_total parameter chosen, return new or running total of tests
   measure: total {
     group_label: "Dynamic (Testing - US Only)"
-    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two"
+    description: "Use with New vs Running Total Filter, can be useful for creating a Look or Dashboard where you toggle between the two  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Total Tests"
     type: number
     hidden: yes
@@ -279,7 +279,7 @@ view: covid_tracking_project_core {
 
   measure: hospitalized_new {
     group_label: "New Cases (Testing - US Only)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used"
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Hospitalizations"
     hidden: yes
     type: sum
@@ -311,7 +311,7 @@ view: covid_tracking_project_core {
   measure: hospitalized_running_total {
     group_label: "Running Total (Testing - US Only)"
     label: "Hospitalizations (Running Total)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used.  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
     hidden: yes
     sql:
@@ -472,7 +472,7 @@ view: covid_tracking_project_core {
   measure: total_new {
     group_label: "New Cases (Testing - US Only)"
     label: "Total Tests (New)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used "
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the new cases during the selected timeframe, otherwise the most recent record will be used  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: sum
     hidden: yes
     sql: ${total_new_cases} ;;
@@ -502,7 +502,7 @@ view: covid_tracking_project_core {
 ## If date in query, show running total of total tests for given date(s), otherwise show running total of total test results for most recent date
   measure: total_running_total {
     group_label: "Running Total (Testing - US Only)"
-    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used."
+    description: "Filter on Measurement Date or Days Since First Outbreak to see the running total on a specific date, don't use with a range of dates or else the results will show the sum of the running totals for each day in that timeframe. If no dates are selected the most recent record will be used.  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     label: "Total Tests (Running Total)"
     type: number
     hidden: yes
@@ -561,7 +561,7 @@ view: covid_tracking_project_core {
 
   measure: case_hospitalization_rate {
     group_label: "Rates (Testing - US Only)"
-    description: "What percent of infections have resulted in hospitalization?"
+    description: "What percent of infections have resulted in hospitalization?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
     hidden: yes
     sql: 1.0 * ${hospitalized_running_total}/NULLIF(${positive_running_total}, 0);;
@@ -657,7 +657,7 @@ view: covid_tracking_project_core {
   measure: case_fatality_rate {
     hidden: yes
     group_label: "Rates (Testing - US Only)"
-    description: "What percent of infections have resulted in death?"
+    description: "What percent of infections have resulted in death?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
     sql: 1.0 * ${death_running_total}/NULLIF(${positive_running_total}, 0);;
     value_format_name: percent_1
@@ -671,7 +671,7 @@ view: covid_tracking_project_core {
   measure: case_fatality_or_hospitalization_rate {
     hidden: yes
     group_label: "Rates (Testing - US Only)"
-    description: "What percent of infections have resulted in hospitalization or death?"
+    description: "What percent of infections have resulted in hospitalization or death?  **This field was deprecated on March 7 2021 by the Covid Tracking Project**"
     type: number
     sql: 1.0 * (${death_running_total} + ${hospitalized_running_total}) /NULLIF(${positive_running_total}, 0);;
     value_format_name: percent_1
