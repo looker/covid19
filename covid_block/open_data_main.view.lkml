@@ -154,7 +154,7 @@ view: open_data_main_core {
 
   measure: cumulative_persons_vaccinated_option_2 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_persons_vaccinated ;;
     filters: {
       field: is_max_date
@@ -195,7 +195,7 @@ view: open_data_main_core {
 
   measure: cumulative_persons_fully_vaccinated_option_2 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_persons_fully_vaccinated ;;
     filters: {
       field: is_max_date
@@ -236,7 +236,7 @@ view: open_data_main_core {
 
   measure: cumulative_tested_option_2 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_tested ;;
     filters: {
       field: is_max_date
@@ -276,7 +276,7 @@ view: open_data_main_core {
 
   measure: cumulative_confirmed_option_2 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_confirmed ;;
     filters: {
       field: is_max_date
@@ -300,13 +300,13 @@ view: open_data_main_core {
   }
   measure: death_cumulative_option_1 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_tested ;;
   }
 
   measure: death_cumulative_option_2 {
     hidden: yes
-    type: min
+    type: sum
     sql: ${TABLE}.cumulative_tested ;;
     filters: {
       field: is_max_date
