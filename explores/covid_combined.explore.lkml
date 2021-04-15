@@ -16,12 +16,18 @@ explore: covid_combined_core {
     sql_on: ${covid_combined.province_state} = ${state_region.state} ;;
   }
 
+  join: open_data_main {
+    view_label: " COVID19"
+    relationship: many_to_many
+    sql_on: ${state_region.state} = ${open_data_main.state_name}
+    AND ${covid_combined.measurement_date} = ${open_data_main.measurement_date} ;;
+  }
+
   join: covid_tracking_project {
     view_label: " COVID19"
     relationship: many_to_one
-    sql_on:
-          ${state_region.state_code} = ${covid_tracking_project.state_code}
-      AND ${covid_combined.measurement_raw} = ${covid_tracking_project.measurement_raw}
+    sql_on:${state_region.state_code} = ${covid_tracking_project.state_code}
+            AND ${covid_combined.measurement_raw} = ${covid_tracking_project.measurement_raw}
     ;;
   }
 
